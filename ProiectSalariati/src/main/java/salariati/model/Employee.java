@@ -16,7 +16,7 @@ public class Employee {
 	private DidacticFunction function;
 	
 	/** The salary of the employee */
-	private String salary;
+	private double salary;
 	
 	/**
 	 * Default constructor for employee
@@ -25,13 +25,13 @@ public class Employee {
 		this.lastName  = "";
 		this.cnp       = "";
 		this.function  = DidacticFunction.ASISTENT;
-		this.salary    = "";
+		this.salary    = 0;
 	}
 	
 	/**
 	 * Constructor with fields for employee
 	 */
-	public Employee(String lastName, String cnp, DidacticFunction function, String salary) {
+	public Employee(String lastName, String cnp, DidacticFunction function, double salary) {
 		this.lastName  = lastName;
 		this.cnp       = cnp;
 		this.function  = function;
@@ -89,7 +89,7 @@ public class Employee {
 	/**
 	 * Getter for the employee salary
 	 */
-	public String getSalary() {
+	public double getSalary() {
 		return salary;
 	}
 
@@ -98,7 +98,7 @@ public class Employee {
 	 * 
 	 * @param salary the salary to be set
 	 */
-	public void setSalary(String salary) {
+	public void setSalary(double salary) {
 		this.salary = salary;
 	}
 	
@@ -124,7 +124,7 @@ public class Employee {
 		boolean hasSameLastName  = this.lastName.equals(comparableEmployee.getLastName()),
 				hasSameCNP       = this.cnp.equals(comparableEmployee.getCnp()),
 				hasSameFunction  = this.function.equals(comparableEmployee.getFunction()),
-				hasSameSalary    = this.salary.equals(comparableEmployee.getSalary());
+				hasSameSalary    = (this.salary == comparableEmployee.getSalary());
 		return hasSameLastName && hasSameCNP && hasSameFunction && hasSameSalary;
 	}
 	
@@ -158,7 +158,7 @@ public class Employee {
 			if(attributes[2].equals("TEACHER"))
 				employee.setFunction(DidacticFunction.TEACHER);
 			
-			employee.setSalary(attributes[3]);
+			employee.setSalary(Integer.parseInt(attributes[3]));
 			
 			if( !validator.isValid(employee) ) {
 				throw new EmployeeException("Invalid line at: " + line);
