@@ -32,7 +32,7 @@ public class StartApp {
 		employeeController.addEmployee(employee);
 
 		Employee toBeModified = employeeController.getEmployeesList().get(0);
-		employeeController.modifyEmployee(toBeModified, new Employee("TESTModified", "1234567894321", DidacticFunction.TEACHER, "2500"));
+		employeeController.modifyEmployee(toBeModified, new Employee("TESTModified", "1234567894321", DidacticFunction.TEACHER, 2500));
 
 		for(Employee _employee : employeeController.getEmployeesList())
 			System.out.println(_employee.toString());
@@ -50,11 +50,11 @@ public class StartApp {
 			System.out.println(_employee.toString());
 		System.out.println("-----------------------------------------");
 
-		Employee employee = new Employee("LastName", "1234567894321", DidacticFunction.ASISTENT, "2500");
+		Employee employee = new Employee("LastName", "1234567894321", DidacticFunction.ASISTENT, 2500);
 		employeeController.addEmployee(employee);
 
 		Employee toBeModified = employeeController.getEmployeesList().get(0);
-		employeeController.modifyEmployee(toBeModified, new Employee("TESTModified", "1234567894321", DidacticFunction.TEACHER, "2500"));
+		employeeController.modifyEmployee(toBeModified, new Employee("TESTModified", "1234567894321", DidacticFunction.TEACHER, 2500));
 
 		for(Employee _employee : employeeController.getEmployeesList())
 			System.out.println(_employee.toString());

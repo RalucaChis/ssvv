@@ -46,7 +46,7 @@ public class UIEmployee {
                     System.out.println("Enter the salary of the employee you want to add: ");
                     double salary = scanner.nextDouble();
 
-                    Employee employee = new Employee(firstName, lastName, cnp, didacticFunction, salary);
+                    Employee employee = new Employee(lastName, cnp, didacticFunction, salary);
 
                     this.employeeController.addEmployee(employee);
                     break;
