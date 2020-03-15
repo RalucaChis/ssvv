@@ -9,6 +9,6 @@ public interface EmployeeRepositoryInterface {
 	void deleteEmployee(Employee employee);
 	void modifyEmployee(Employee oldEmployee, Employee newEmployee);
 	List<Employee> getEmployeeList();
-	List<Employee> getEmployeeByCriteria(String criteria);
+	List<Employee> getEmployeesByAgeAsc();
 
 }

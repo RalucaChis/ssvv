@@ -1,8 +1,10 @@
 package salariati.repository.implementations;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import salariati.exception.EmployeeException;
 
@@ -11,7 +13,7 @@ import salariati.model.Employee;
 import salariati.repository.interfaces.EmployeeRepositoryInterface;
 import salariati.validator.EmployeeValidator;
 
-public class EmployeeImpl implements EmployeeRepositoryInterface {
+public class EmployeeRepositoryImpl implements EmployeeRepositoryInterface {
 	
 	private final String employeeDBFile = "employeeDB/employees.txt";
 	private EmployeeValidator employeeValidator = new EmployeeValidator();
@@ -79,12 +81,22 @@ public class EmployeeImpl implements EmployeeRepositoryInterface {
 		return employeeList;
 	}
 
-
 	@Override
-	public List<Employee> getEmployeeByCriteria(String criteria) {
-		List<Employee> employeeList = new ArrayList<Employee>();
-		
-		return employeeList;
+	public List<Employee> getEmployeesByAgeAsc() {
+		return getEmployeeList().stream()
+				.sorted((e1, e2) -> {
+					String cnp1 = e1.getCnp();
+					String cnp2 = e2.getCnp();
+					LocalDate birthday1 = LocalDate.of(
+							Integer.parseInt(cnp1.substring(1, 3)),
+							Integer.parseInt(cnp1.substring(3, 5)),
+							Integer.parseInt(cnp1.substring(5, 7)));
+					LocalDate birthday2 = LocalDate.of(
+							Integer.parseInt(cnp2.substring(1, 3)),
+							Integer.parseInt(cnp2.substring(3, 5)),
+							Integer.parseInt(cnp2.substring(5, 7)));
+					return birthday2.compareTo(birthday1);
+				})
+				.collect(Collectors.toList());
 	}
-
 }
