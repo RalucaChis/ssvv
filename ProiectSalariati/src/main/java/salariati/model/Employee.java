@@ -144,21 +144,21 @@ public class Employee {
 		
 		String[] attributes = _employee.split("[;]");
 		
-		if( attributes.length != 5 ) {
+		if( attributes.length != 4 ) {
 			throw new EmployeeException("Invalid line at: " + line);
 		} else {
 			EmployeeValidator validator = new EmployeeValidator();
-			employee.setLastName(attributes[1]);
-			employee.setCnp(attributes[2]);
+			employee.setLastName(attributes[0]);
+			employee.setCnp(attributes[1]);
 			
-			if(attributes[3].equals("ASISTENT"))
+			if(attributes[2].equals("ASISTENT"))
 				employee.setFunction(DidacticFunction.ASISTENT);
-			if(attributes[3].equals("LECTURER"))
+			if(attributes[2].equals("LECTURER"))
 				employee.setFunction(DidacticFunction.LECTURER);
-			if(attributes[3].equals("TEACHER"))
+			if(attributes[2].equals("TEACHER"))
 				employee.setFunction(DidacticFunction.TEACHER);
 			
-			employee.setSalary(Integer.parseInt(attributes[4]));
+			employee.setSalary(Integer.parseInt(attributes[3]));
 			
 			if( !validator.isValid(employee) ) {
 				throw new EmployeeException("Invalid line at: " + line);

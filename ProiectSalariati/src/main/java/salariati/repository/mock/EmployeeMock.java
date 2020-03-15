@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.ListIterator;
 
 import salariati.enumeration.DidacticFunction;
-
 import salariati.model.Employee;
 import salariati.repository.interfaces.EmployeeRepositoryInterface;
 import salariati.validator.EmployeeValidator;
@@ -52,7 +52,12 @@ public class EmployeeMock implements EmployeeRepositoryInterface {
 
 	@Override
 	public void modifyEmployee(Employee oldEmployee, Employee newEmployee) {
-		// TODO Auto-generated method stub
+		ListIterator<Employee> it = employeeList.listIterator();
+		while (it.hasNext()) {
+			if (it.next().equals(oldEmployee)) {
+				it.set(newEmployee);
+			}
+		}
 	}
 
 	@Override
