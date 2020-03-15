@@ -24,10 +24,17 @@ public class EmployeeImpl implements EmployeeRepositoryInterface {
 				bw = new BufferedWriter(new FileWriter(employeeDBFile, true));
 				bw.write(employee.toString());
 				bw.newLine();
-				bw.close();
 				return true;
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+			finally {
+				if (bw != null)
+					try {
+						bw.close();
+					} catch (IOException e) {
+						System.err.println("Error while closing the bufferWriter: " + e);
+					}
 			}
 		}
 		return false;
@@ -41,8 +48,50 @@ public class EmployeeImpl implements EmployeeRepositoryInterface {
 
 	@Override
 	public void modifyEmployee(Employee oldEmployee, Employee newEmployee) {
-		// TODO Auto-generated method stub
-		
+		BufferedReader br = null;
+		FileOutputStream fileOut = null;
+		StringBuffer buffer = new StringBuffer();
+		String line;
+		try {
+			br = new BufferedReader(new FileReader(employeeDBFile));
+			int counter = 0;
+			while ((line = br.readLine()) != null) {
+				Employee employee = new Employee();
+				try {
+					employee = Employee.getEmployeeFromString(line, counter);
+				} catch(EmployeeException ex) {
+					System.err.println("Error while reading: " + ex.toString());
+				}
+				if (employee.equals(oldEmployee)) {
+					line = newEmployee.toString();
+				}
+
+				buffer.append(line);
+				buffer.append("\n");
+				counter++;
+			}
+
+			fileOut = new FileOutputStream(employeeDBFile);
+			fileOut.write(buffer.toString().getBytes());
+
+		} catch (FileNotFoundException e) {
+			System.err.println("Error while reading: " + e);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null)
+				try {
+					br.close();
+				} catch (IOException e) {
+					System.err.println("Error while closing the bufferReader: " + e);
+				}
+			if (fileOut != null)
+				try {
+					fileOut.close();
+				} catch (IOException e) {
+					System.err.println("Error while closing the fileWriter: " + e);
+				}
+		}
 	}
 
 	@Override
@@ -55,16 +104,14 @@ public class EmployeeImpl implements EmployeeRepositoryInterface {
 			String line;
 			int counter = 0;
 			while ((line = br.readLine()) != null) {
-				Employee employee = new Employee();
 				try {
-					employee = (Employee) Employee.getEmployeeFromString(line, counter);
+					Employee employee = Employee.getEmployeeFromString(line, counter);
 					employeeList.add(employee);
 				} catch(EmployeeException ex) {
 					System.err.println("Error while reading: " + ex.toString());
 				}
+				counter++;
 			}
-		} catch (FileNotFoundException e) {
-			System.err.println("Error while reading: " + e);
 		} catch (IOException e) {
 			System.err.println("Error while reading: " + e);
 		} finally {
