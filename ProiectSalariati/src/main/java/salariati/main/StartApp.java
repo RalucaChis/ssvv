@@ -7,7 +7,7 @@ import main.java.salariati.repository.implementations.EmployeeRepository;
 import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
 import main.java.salariati.repository.mock.EmployeeMock;
 import main.java.salariati.validator.EmployeeValidator;
-import main.java.salariati.view.UIEmployee;
+import salariati.view.UIEmployee;
 
 //functionalitati
 //F01.	 adaugarea unui nou angajat (nume, prenume, CNP, functia didactica, salariul de incadrare);

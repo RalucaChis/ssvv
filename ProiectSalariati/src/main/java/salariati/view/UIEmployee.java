@@ -1,4 +1,4 @@
-package main.java.salariati.view;
+package salariati.view;
 
 import main.java.salariati.controller.EmployeeController;
 import main.java.salariati.enumeration.DidacticFunction;
@@ -29,23 +29,29 @@ public class UIEmployee {
     public void runMenu() {
         while (true) {
             showMenu();
-            Scanner scanner = new Scanner(System.in);
+            Scanner key = new Scanner(System.in);
             System.out.println("Enter your option: ");
-            int option = scanner.nextInt();
+            int option = key.nextInt();
+            Scanner scanner;
             switch (option) {
                 case 1: {
+
                     System.out.println("Enter the first name of the employee you want to add: ");
+                    scanner = new Scanner(System.in);
                     String firstName = scanner.nextLine();
+                    System.out.println("You entered: "+firstName);
                     System.out.println("Enter the last name of the employee you want to add: ");
                     String lastName = scanner.nextLine();
+                    System.out.println("You entered: "+lastName);
                     System.out.println("Enter the CNP of the employee you want to add: ");
                     String cnp = scanner.nextLine();
+                    System.out.println("You entered: "+cnp);
                     System.out.println("Enter the didact function (ASISTENT, LECTURER, CONFERENTIAR, TEACHER) of the employee you want to add: ");
                     String function = scanner.nextLine();
+                    System.out.println("You entered: "+function);
                     DidacticFunction didacticFunction = DidacticFunction.valueOf(function);
                     System.out.println("Enter the salary of the employee you want to add: ");
                     double salary = scanner.nextDouble();
-
                     Employee employee = new Employee(lastName, firstName, cnp, didacticFunction, salary);
 
                     this.employeeController.addEmployee(employee);
@@ -53,6 +59,7 @@ public class UIEmployee {
                 }
                 case (2): {
                     System.out.println("Enter the CNP of the employee you want to delete: ");
+                    scanner = new Scanner(System.in);
                     String cnp = scanner.nextLine();
 
                     List<Employee> employees = this.employeeController.getEmployeesList();
@@ -65,11 +72,12 @@ public class UIEmployee {
                 }
                 case (3): {
                     System.out.println("Enter the CNP of the employee you want to update: ");
+                    scanner = new Scanner(System.in);
                     String cnp = scanner.nextLine();
-                    Employee oldEmployee = new Employee();
-                    List<Employee> employees = employeeController.getEmployeesList();
-                    for (Employee e : employees) {
-                        if (e.getCnp().equals(cnp)) {
+                    Employee oldEmployee=new Employee();
+                    List<Employee> employees=employeeController.getEmployeesList();
+                    for (Employee e :employees){
+                        if(e.getCnp().equals(cnp)) {
                             oldEmployee.setLastName(e.getLastName());
                             oldEmployee.setCnp(cnp);
                             oldEmployee.setFunction(e.getFunction());
@@ -87,8 +95,8 @@ public class UIEmployee {
                     System.out.println("Enter the new salary : ");
                     double salary = scanner.nextDouble();
 
-                    Employee newEmployee = new Employee(lastName, firstName, cnp, didacticFunction, salary);
-                    employeeController.modifyEmployee(oldEmployee, newEmployee);
+                    Employee newEmployee=new Employee(lastName, firstName,cnp,didacticFunction,salary);
+                    employeeController.modifyEmployee(oldEmployee,newEmployee);
                     break;
                 }
                 case (4): {

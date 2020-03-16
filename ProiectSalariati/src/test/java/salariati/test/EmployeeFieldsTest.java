@@ -1,12 +1,12 @@
 package salariati.test;
 
 import static org.junit.Assert.*;
-import salariati.model.Employee;
+import main.java.salariati.model.Employee;
 
 import org.junit.*;
 
-import salariati.validator.EmployeeValidator;
-import salariati.enumeration.DidacticFunction;
+import main.java.salariati.validator.EmployeeValidator;
+import main.java.salariati.enumeration.DidacticFunction;
 
 public class EmployeeFieldsTest {
 
@@ -16,7 +16,7 @@ public class EmployeeFieldsTest {
 	@Before
 	public void setUp() {
 		employeeValidator = new EmployeeValidator();
-		employee = new Employee("Ardelean", "1234567891234", DidacticFunction.ASISTENT, 1234);
+		employee = new Employee("Ardelean","Clujean", "1234567891234", DidacticFunction.ASISTENT, 1234);
 	}
 	
 	@Test
