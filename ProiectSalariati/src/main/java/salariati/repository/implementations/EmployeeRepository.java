@@ -12,31 +12,27 @@ import salariati.repository.interfaces.EmployeeRepositoryInterface;
 import salariati.validator.EmployeeValidator;
 
 public class EmployeeRepository implements EmployeeRepositoryInterface {
-
     private final String employeeDBFile = "employeeDB/employees.txt";
-    private EmployeeValidator employeeValidator = new EmployeeValidator();
 
     @Override
     public boolean addEmployee(Employee employee) {
-        if( employeeValidator.isValid(employee) ) {
-            BufferedWriter bw = null;
-            try {
-                bw = new BufferedWriter(new FileWriter(employeeDBFile, true));
-                bw.write(employee.toString());
-                bw.newLine();
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            finally {
-                if (bw != null)
-                    try {
-                        bw.close();
-                    } catch (IOException e) {
-                        System.err.println("Error while closing the bufferWriter: " + e);
-                    }
-            }
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(employeeDBFile, true));
+            bw.write(employee.toString());
+            bw.newLine();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bw != null)
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    System.err.println("Error while closing the bufferWriter: " + e);
+                }
         }
+
         return false;
     }
 
@@ -59,7 +55,7 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
                 Employee employee = new Employee();
                 try {
                     employee = Employee.getEmployeeFromString(line, counter);
-                } catch(EmployeeException ex) {
+                } catch (EmployeeException ex) {
                     System.err.println("Error while reading: " + ex.toString());
                 }
                 if (employee.equals(oldEmployee)) {
@@ -107,7 +103,7 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
                 try {
                     Employee employee = Employee.getEmployeeFromString(line, counter);
                     employeeList.add(employee);
-                } catch(EmployeeException ex) {
+                } catch (EmployeeException ex) {
                     System.err.println("Error while reading: " + ex.toString());
                 }
                 counter++;
