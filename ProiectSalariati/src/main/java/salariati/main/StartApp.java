@@ -3,7 +3,7 @@ package salariati.main;
 import salariati.controller.EmployeeController;
 import salariati.enumeration.DidacticFunction;
 import salariati.model.Employee;
-import salariati.repository.implementations.EmployeeRepositoryImpl;
+import salariati.repository.implementations.EmployeeRepository;
 import salariati.repository.interfaces.EmployeeRepositoryInterface;
 import salariati.repository.mock.EmployeeMock;
 import salariati.validator.EmployeeValidator;
@@ -20,7 +20,8 @@ public class StartApp {
 //		testMockRepo();
 //		testFileRepo();
 
-		EmployeeRepositoryInterface employeeRepository = new EmployeeRepositoryImpl();
+		EmployeeRepositoryInterface employeeRepository = new EmployeeRepository();
+//		EmployeeRepositoryInterface employeeRepository = new EmployeeMock();
 		EmployeeController employeeController=new EmployeeController(employeeRepository);
 
 		UIEmployee ui = new UIEmployee(employeeController);
@@ -50,7 +51,7 @@ public class StartApp {
 	}
 
 	private static void testFileRepo() {
-		EmployeeRepositoryInterface employeesRepository = new EmployeeRepositoryImpl();
+		EmployeeRepositoryInterface employeesRepository = new EmployeeRepository();
 		EmployeeController employeeController = new EmployeeController(employeesRepository);
 
 		for(Employee _employee : employeeController.getEmployeesList())

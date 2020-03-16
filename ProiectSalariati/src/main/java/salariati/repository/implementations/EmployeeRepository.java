@@ -1,8 +1,11 @@
 package salariati.repository.implementations;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import salariati.exception.EmployeeException;
 
@@ -42,8 +45,54 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
 
     @Override
     public void deleteEmployee(Employee employee) {
-        // TODO Auto-generated method stub
+        //saving the employees in a list
+        List<Employee> employeeList = new ArrayList<Employee>();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(employeeDBFile));
+            String line;
+            int counter = 0;
+            while ((line = br.readLine()) != null) {
+                Employee empl = new Employee();
+                try {
+                    empl = (Employee) Employee.getEmployeeFromString(line, counter);
+                    employeeList.add(empl);
+                } catch (EmployeeException ex) {
+                    System.err.println("Error while reading: " + ex.toString());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Error while reading: " + e);
+        } catch (IOException e) {
+            System.err.println("Error while reading: " + e);
+        } finally {
+            if (br != null)
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    System.err.println("Error while closing the file: " + e);
+                }
+        }
 
+        //deleting the employee given as a parameter from list
+        for (Employee e : employeeList) {
+            if (e.equals(employee))
+                employeeList.remove(e);
+        }
+
+        //writing the new list in file
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(employeeDBFile));
+            for (Employee e : employeeList) {
+                bw.write(e.toString());
+                bw.newLine();
+            }
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -128,13 +177,31 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
 
     @Override
     public List<Employee> getEmployeesByAgeAsc() {
-        return null;
+        return getEmployeeList().stream()
+                .sorted((e1, e2) -> {
+                    String cnp1 = e1.getCnp();
+                    String cnp2 = e2.getCnp();
+                    LocalDate birthday1 = LocalDate.of(
+                            Integer.parseInt(cnp1.substring(1, 3)),
+                            Integer.parseInt(cnp1.substring(3, 5)),
+                            Integer.parseInt(cnp1.substring(5, 7)));
+                    LocalDate birthday2 = LocalDate.of(
+                            Integer.parseInt(cnp2.substring(1, 3)),
+                            Integer.parseInt(cnp2.substring(3, 5)),
+                            Integer.parseInt(cnp2.substring(5, 7)));
+                    return birthday2.compareTo(birthday1);
+                })
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Employee> getEmployeesBySalaryDesc() {
-        return null;
+        List<Employee> employeesSortedBySalary= getEmployeeList().stream().sorted((e1,e2)->
+        {Double salary1=e1.getSalary();
+            Double salary2=e2.getSalary();
+            return salary1.compareTo(salary2);
+        }).collect(Collectors.toList());
+        Collections.reverse(employeesSortedBySalary);
+        return employeesSortedBySalary;
     }
-
-
 }
