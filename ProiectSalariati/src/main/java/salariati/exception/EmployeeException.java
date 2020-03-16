@@ -1,4 +1,4 @@
-package salariati.exception;
+package main.java.salariati.exception;
 
 public class EmployeeException extends Exception {
 

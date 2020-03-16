@@ -1,5 +1,5 @@
-package salariati.enumeration;
+package main.java.salariati.enumeration;
 
 public enum DidacticFunction {
-	ASISTENT, LECTURER, CONFERENTIAR, TEACHER;
+	ASISTENT, LECTURER, CONFERENTIAR, TEACHER
 }

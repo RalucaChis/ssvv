@@ -1,4 +1,4 @@
-package salariati.repository.mock;
+package main.java.salariati.repository.mock;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.ListIterator;
 
-import salariati.enumeration.DidacticFunction;
-import salariati.model.Employee;
-import salariati.repository.interfaces.EmployeeRepositoryInterface;
-import salariati.validator.EmployeeValidator;
+import main.java.salariati.enumeration.DidacticFunction;
+import main.java.salariati.model.Employee;
+import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
+import main.java.salariati.validator.EmployeeValidator;
 
 public class EmployeeMock implements EmployeeRepositoryInterface {
 
@@ -18,16 +18,15 @@ public class EmployeeMock implements EmployeeRepositoryInterface {
     private EmployeeValidator employeeValidator;
 
     public EmployeeMock() {
-
-        employeeValidator = new EmployeeValidator();
         employeeList = new ArrayList<Employee>();
+        employeeValidator = new EmployeeValidator();
 
-        Employee Ionel = new Employee("Pacuraru", "1230516890876", DidacticFunction.ASISTENT, 2500);
-        Employee Mihai = new Employee("Dumitrescu", "1731010890876", DidacticFunction.LECTURER, 2500);
-        Employee Ionela = new Employee("Ionescu", "1830412890876", DidacticFunction.LECTURER, 2500);
-        Employee Mihaela = new Employee("Pacuraru", "1901212890876", DidacticFunction.ASISTENT, 2500);
-        Employee Vasile = new Employee("Georgescu", "1650607890876", DidacticFunction.TEACHER, 2500);
-        Employee Marin = new Employee("Puscas", "1761203890876", DidacticFunction.TEACHER, 2500);
+        Employee Ionel = new Employee("Pacuraru", "Marcel", "1230516890876", DidacticFunction.ASISTENT, 2500);
+        Employee Mihai = new Employee("Dumitrescu", "Daniel", "1731010890876", DidacticFunction.LECTURER, 2500);
+        Employee Ionela = new Employee("Ionescu", "Stefana", "1830412890876", DidacticFunction.LECTURER, 2500);
+        Employee Mihaela = new Employee("Pacuraru", "Maria", "1901212890876", DidacticFunction.ASISTENT, 2500);
+        Employee Vasile = new Employee("Georgescu", "Ana", "1650607890876", DidacticFunction.TEACHER, 2500);
+        Employee Marin = new Employee("Puscas", "Ligia", "1761203890876", DidacticFunction.TEACHER, 2500);
 
         employeeList.add(Ionel);
         employeeList.add(Mihai);

@@ -1,9 +1,10 @@
-package salariati.controller;
+package main.java.salariati.controller;
+
+import main.java.salariati.model.Employee;
+import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
+import main.java.salariati.validator.EmployeeValidator;
 
 import java.util.List;
-
-import salariati.model.Employee;
-import salariati.repository.interfaces.EmployeeRepositoryInterface;
 
 public class EmployeeController {
 

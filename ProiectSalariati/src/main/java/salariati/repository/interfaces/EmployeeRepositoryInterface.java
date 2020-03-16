@@ -1,7 +1,8 @@
-package salariati.repository.interfaces;
+package main.java.salariati.repository.interfaces;
+
+import main.java.salariati.model.Employee;
 
 import java.util.List;
-import salariati.model.Employee;
 
 public interface EmployeeRepositoryInterface {
 	

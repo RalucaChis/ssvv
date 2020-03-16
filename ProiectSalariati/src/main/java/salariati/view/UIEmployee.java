@@ -1,8 +1,8 @@
-package salariati.view;
+package main.java.salariati.view;
 
-import salariati.controller.EmployeeController;
-import salariati.enumeration.DidacticFunction;
-import salariati.model.Employee;
+import main.java.salariati.controller.EmployeeController;
+import main.java.salariati.enumeration.DidacticFunction;
+import main.java.salariati.model.Employee;
 
 import java.util.List;
 import java.util.Scanner;
@@ -46,7 +46,7 @@ public class UIEmployee {
                     System.out.println("Enter the salary of the employee you want to add: ");
                     double salary = scanner.nextDouble();
 
-                    Employee employee = new Employee(lastName, cnp, didacticFunction, salary);
+                    Employee employee = new Employee(lastName, firstName, cnp, didacticFunction, salary);
 
                     this.employeeController.addEmployee(employee);
                     break;
@@ -66,10 +66,10 @@ public class UIEmployee {
                 case (3): {
                     System.out.println("Enter the CNP of the employee you want to update: ");
                     String cnp = scanner.nextLine();
-                    Employee oldEmployee=new Employee();
-                    List<Employee> employees=employeeController.getEmployeesList();
-                    for (Employee e :employees){
-                        if(e.getCnp().equals(cnp)) {
+                    Employee oldEmployee = new Employee();
+                    List<Employee> employees = employeeController.getEmployeesList();
+                    for (Employee e : employees) {
+                        if (e.getCnp().equals(cnp)) {
                             oldEmployee.setLastName(e.getLastName());
                             oldEmployee.setCnp(cnp);
                             oldEmployee.setFunction(e.getFunction());
@@ -87,8 +87,8 @@ public class UIEmployee {
                     System.out.println("Enter the new salary : ");
                     double salary = scanner.nextDouble();
 
-                    Employee newEmployee=new Employee(lastName,cnp,didacticFunction,salary);
-                    employeeController.modifyEmployee(oldEmployee,newEmployee);
+                    Employee newEmployee = new Employee(lastName, firstName, cnp, didacticFunction, salary);
+                    employeeController.modifyEmployee(oldEmployee, newEmployee);
                     break;
                 }
                 case (4): {

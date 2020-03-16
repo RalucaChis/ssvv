@@ -1,4 +1,4 @@
-package salariati.repository.implementations;
+package main.java.salariati.repository.implementations;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -7,12 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import salariati.exception.EmployeeException;
-
-import salariati.model.Employee;
-
-import salariati.repository.interfaces.EmployeeRepositoryInterface;
-import salariati.validator.EmployeeValidator;
+import main.java.salariati.exception.EmployeeException;
+import main.java.salariati.model.Employee;
+import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
 
 public class EmployeeRepositoryImpl implements EmployeeRepositoryInterface {
     private final String employeeDBFile = "employeeDB/employees.txt";
