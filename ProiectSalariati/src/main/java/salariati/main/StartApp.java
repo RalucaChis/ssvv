@@ -3,10 +3,11 @@ package main.java.salariati.main;
 import main.java.salariati.controller.EmployeeController;
 import main.java.salariati.enumeration.DidacticFunction;
 import main.java.salariati.model.Employee;
-import main.java.salariati.repository.implementations.EmployeeRepositoryImpl;
+import main.java.salariati.repository.implementations.EmployeeRepository;
 import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
 import main.java.salariati.repository.mock.EmployeeMock;
 import main.java.salariati.validator.EmployeeValidator;
+import main.java.salariati.view.UIEmployee;
 
 //functionalitati
 //F01.	 adaugarea unui nou angajat (nume, prenume, CNP, functia didactica, salariul de incadrare);
@@ -16,8 +17,14 @@ import main.java.salariati.validator.EmployeeValidator;
 public class StartApp {
 
     public static void main(String[] args) {
-//		testMockRepo();
-        testFileRepo();
+        //		testMockRepo();
+        //       testFileRepo();
+        EmployeeRepositoryInterface employeeRepository = new EmployeeRepository();
+        //		EmployeeRepositoryInterface employeeRepository = new EmployeeMock();
+        EmployeeController employeeController = new EmployeeController(employeeRepository);
+
+        UIEmployee ui = new UIEmployee(employeeController);
+        ui.runMenu();
     }
 
     private static void testMockRepo() {
@@ -43,7 +50,7 @@ public class StartApp {
     }
 
     private static void testFileRepo() {
-        EmployeeRepositoryInterface employeesRepository = new EmployeeRepositoryImpl();
+        EmployeeRepositoryInterface employeesRepository = new EmployeeRepository();
         EmployeeController employeeController = new EmployeeController(employeesRepository);
 
         for (Employee _employee : employeeController.getEmployeesList())
