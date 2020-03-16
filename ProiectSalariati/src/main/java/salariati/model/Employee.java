@@ -125,6 +125,7 @@ public class Employee {
         String employee = "";
 
         employee += lastName + ";";
+        employee += firstName + ";";
         employee += cnp + ";";
         employee += function.toString() + ";";
         employee += salary;
@@ -156,7 +157,7 @@ public class Employee {
 
         String[] attributes = _employee.split("[;]");
 
-        if (attributes.length != 4) {
+        if (attributes.length != 5) {
             throw new EmployeeException("Invalid line at: " + line);
         } else {
             EmployeeValidator validator = new EmployeeValidator();
@@ -171,7 +172,7 @@ public class Employee {
             if (attributes[3].equals("TEACHER"))
                 employee.setFunction(DidacticFunction.TEACHER);
 
-            employee.setSalary(Double.parseDouble(attributes[3]));
+            employee.setSalary(Double.parseDouble(attributes[4]));
 
             if (!validator.isValid(employee)) {
                 throw new EmployeeException("Invalid line at: " + line);

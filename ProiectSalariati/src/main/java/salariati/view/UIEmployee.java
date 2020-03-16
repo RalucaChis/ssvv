@@ -79,11 +79,12 @@ public class UIEmployee {
                     for (Employee e :employees){
                         if(e.getCnp().equals(cnp)) {
                             oldEmployee.setLastName(e.getLastName());
+                            oldEmployee.setFirstName(e.getFirstName());
                             oldEmployee.setCnp(cnp);
                             oldEmployee.setFunction(e.getFunction());
                             oldEmployee.setSalary(e.getSalary());
+                            break;
                         }
-                        break;
                     }
                     System.out.println("Enter the new first name: ");
                     String firstName = scanner.nextLine();

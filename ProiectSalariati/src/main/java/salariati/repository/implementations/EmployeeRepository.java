@@ -182,7 +182,7 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
                             Integer.parseInt(cnp2.substring(1, 3)),
                             Integer.parseInt(cnp2.substring(3, 5)),
                             Integer.parseInt(cnp2.substring(5, 7)));
-                    return birthday2.compareTo(birthday1);
+                    return birthday1.compareTo(birthday2);
                 })
                 .collect(Collectors.toList());
     }
