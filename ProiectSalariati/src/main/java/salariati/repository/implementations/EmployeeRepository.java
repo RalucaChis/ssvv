@@ -1,4 +1,4 @@
-package main.java.salariati.repository.implementations;
+package salariati.repository.implementations;
 
 import main.java.salariati.exception.EmployeeException;
 import main.java.salariati.model.Employee;
@@ -39,39 +39,16 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
     @Override
     public void deleteEmployee(Employee employee) {
         //saving the employees in a list
-        List<Employee> employeeList = new ArrayList<Employee>();
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader(employeeDBFile));
-            String line;
-            int counter = 0;
-            while ((line = br.readLine()) != null) {
-                Employee empl = new Employee();
-                try {
-                    empl = Employee.getEmployeeFromString(line, counter);
-                    employeeList.add(empl);
-                } catch (EmployeeException ex) {
-                    System.err.println("Error while reading: " + ex.toString());
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.err.println("Error while reading: " + e);
-        } catch (IOException e) {
-            System.err.println("Error while reading: " + e);
-        } finally {
-            if (br != null)
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    System.err.println("Error while closing the file: " + e);
-                }
-        }
+        List<Employee> employeeList = getEmployeeList();
+        List<Employee> deleteList= new ArrayList<>();
 
         //deleting the employee given as a parameter from list
         for (Employee e : employeeList) {
-            if (e.equals(employee))
-                employeeList.remove(e);
+            if (e.equals(employee)) {
+                deleteList.add(e);
+            }
         }
+        employeeList.removeAll(deleteList);
 
         //writing the new list in file
         BufferedWriter bw = null;
