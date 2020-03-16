@@ -10,5 +10,6 @@ public interface EmployeeRepositoryInterface {
 	void modifyEmployee(Employee oldEmployee, Employee newEmployee);
 	List<Employee> getEmployeeList();
 	List<Employee> getEmployeesByAgeAsc();
+	List<Employee> getEmployeesBySalaryDesc();
 
 }

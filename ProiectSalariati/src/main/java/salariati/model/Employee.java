@@ -158,7 +158,7 @@ public class Employee {
 			if(attributes[2].equals("TEACHER"))
 				employee.setFunction(DidacticFunction.TEACHER);
 			
-			employee.setSalary(Integer.parseInt(attributes[3]));
+			employee.setSalary(Double.parseDouble(attributes[3]));
 			
 			if( !validator.isValid(employee) ) {
 				throw new EmployeeException("Invalid line at: " + line);

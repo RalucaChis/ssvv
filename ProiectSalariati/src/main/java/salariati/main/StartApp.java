@@ -1,12 +1,12 @@
 package salariati.main;
 
+import salariati.controller.EmployeeController;
+import salariati.enumeration.DidacticFunction;
 import salariati.model.Employee;
-import salariati.repository.implementations.EmployeeImpl;
+import salariati.repository.implementations.EmployeeRepositoryImpl;
 import salariati.repository.interfaces.EmployeeRepositoryInterface;
 import salariati.repository.mock.EmployeeMock;
 import salariati.validator.EmployeeValidator;
-import salariati.controller.EmployeeController;
-import salariati.enumeration.DidacticFunction;
 
 //functionalitati
 //F01.	 adaugarea unui nou angajat (nume, prenume, CNP, functia didactica, salariul de incadrare);
@@ -43,7 +43,7 @@ public class StartApp {
 	}
 
 	private static void testFileRepo() {
-		EmployeeRepositoryInterface employeesRepository = new EmployeeImpl();
+		EmployeeRepositoryInterface employeesRepository = new EmployeeRepositoryImpl();
 		EmployeeController employeeController = new EmployeeController(employeesRepository);
 
 		for(Employee _employee : employeeController.getEmployeesList())

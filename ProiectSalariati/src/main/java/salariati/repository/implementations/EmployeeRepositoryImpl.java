@@ -3,6 +3,7 @@ package salariati.repository.implementations;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -145,5 +146,16 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryInterface {
 					return birthday2.compareTo(birthday1);
 				})
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Employee> getEmployeesBySalaryDesc() {
+		List<Employee> employeesSortedBySalary= getEmployeeList().stream().sorted((e1,e2)->
+		{Double salary1=e1.getSalary();
+		 Double salary2=e2.getSalary();
+		 return salary1.compareTo(salary2);
+		}).collect(Collectors.toList());
+		Collections.reverse(employeesSortedBySalary);
+		return employeesSortedBySalary;
 	}
 }

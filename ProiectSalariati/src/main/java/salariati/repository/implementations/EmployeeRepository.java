@@ -126,12 +126,15 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
         return employeeList;
     }
 
+    @Override
+    public List<Employee> getEmployeesByAgeAsc() {
+        return null;
+    }
 
     @Override
-    public List<Employee> getEmployeeByCriteria(String criteria) {
-        List<Employee> employeeList = new ArrayList<Employee>();
-
-        return employeeList;
+    public List<Employee> getEmployeesBySalaryDesc() {
+        return null;
     }
+
 
 }

@@ -40,7 +40,7 @@ public class UIEmployee {
                     String lastName = scanner.nextLine();
                     System.out.println("Enter the CNP of the employee you want to add: ");
                     String cnp = scanner.nextLine();
-                    System.out.println("Enter the didact function (ASISTENT, LECTURER, TEACHER) of the employee you want to add: ");
+                    System.out.println("Enter the didact function (ASISTENT, LECTURER, CONFERENTIAR, TEACHER) of the employee you want to add: ");
                     String function = scanner.nextLine();
                     DidacticFunction didacticFunction = DidacticFunction.valueOf(function);
                     System.out.println("Enter the salary of the employee you want to add: ");
@@ -60,20 +60,47 @@ public class UIEmployee {
                         if (e.getCnp().equals(cnp))
                             this.employeeController.deleteEmployee(e);
                     }
-                    break;
-                }
-                case (3): {
 
                     break;
                 }
+                case (3): {
+                    System.out.println("Enter the CNP of the employee you want to update: ");
+                    String cnp = scanner.nextLine();
+                    Employee oldEmployee=new Employee();
+                    List<Employee> employees=employeeController.getEmployeesList();
+                    for (Employee e :employees){
+                        if(e.getCnp().equals(cnp)) {
+                            oldEmployee.setLastName(e.getLastName());
+                            oldEmployee.setCnp(cnp);
+                            oldEmployee.setFunction(e.getFunction());
+                            oldEmployee.setSalary(e.getSalary());
+                        }
+                        break;
+                    }
+                    System.out.println("Enter the new first name: ");
+                    String firstName = scanner.nextLine();
+                    System.out.println("Enter the new last name: ");
+                    String lastName = scanner.nextLine();
+                    System.out.println("Enter the new didactic function (ASISTENT, LECTURER, CONFERENTIAR, TEACHER): ");
+                    String function = scanner.nextLine();
+                    DidacticFunction didacticFunction = DidacticFunction.valueOf(function);
+                    System.out.println("Enter the new salary : ");
+                    double salary = scanner.nextDouble();
+
+                    Employee newEmployee=new Employee(lastName,cnp,didacticFunction,salary);
+                    employeeController.modifyEmployee(oldEmployee,newEmployee);
+                    break;
+                }
                 case (4): {
-                    List<Employee> employees = this.employeeController.getEmployeesList();
+                    List<Employee> employees = this.employeeController.getEmployeesBySalaryDesc();
                     for (Employee e : employees)
                         System.out.println(e.toString());
                     break;
                 }
                 case (5): {
-                    
+                    List<Employee> employees = this.employeeController.getEmployeesByAgeAsc();
+                    for (Employee e : employees)
+                        System.out.println(e.toString());
                     break;
                 }
             }

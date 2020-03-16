@@ -28,5 +28,13 @@ public class EmployeeController {
 	public void deleteEmployee(Employee employee) {
 		employeeRepository.deleteEmployee(employee);
 	}
+
+	public List<Employee> getEmployeesByAgeAsc(){
+		return employeeRepository.getEmployeesByAgeAsc();
+	}
+
+	public List<Employee> getEmployeesBySalaryDesc(){
+		return employeeRepository.getEmployeesBySalaryDesc();
+	}
 	
 }
