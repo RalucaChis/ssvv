@@ -7,6 +7,7 @@ import salariati.repository.implementations.EmployeeRepositoryImpl;
 import salariati.repository.interfaces.EmployeeRepositoryInterface;
 import salariati.repository.mock.EmployeeMock;
 import salariati.validator.EmployeeValidator;
+import salariati.view.UIEmployee;
 
 //functionalitati
 //F01.	 adaugarea unui nou angajat (nume, prenume, CNP, functia didactica, salariul de incadrare);
@@ -17,7 +18,13 @@ public class StartApp {
 	
 	public static void main(String[] args) {
 //		testMockRepo();
-		testFileRepo();
+//		testFileRepo();
+
+		EmployeeRepositoryInterface employeeRepository = new EmployeeRepositoryImpl();
+		EmployeeController employeeController=new EmployeeController(employeeRepository);
+
+		UIEmployee ui = new UIEmployee(employeeController);
+		ui.runMenu();
 	}
 
 	private static void testMockRepo() {
