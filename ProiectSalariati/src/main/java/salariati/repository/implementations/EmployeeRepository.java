@@ -1,4 +1,8 @@
-package salariati.repository.implementations;
+package main.java.salariati.repository.implementations;
+
+import main.java.salariati.exception.EmployeeException;
+import main.java.salariati.model.Employee;
+import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -7,39 +11,28 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import salariati.exception.EmployeeException;
-
-import salariati.model.Employee;
-
-import salariati.repository.interfaces.EmployeeRepositoryInterface;
-import salariati.validator.EmployeeValidator;
-
 public class EmployeeRepository implements EmployeeRepositoryInterface {
-
     private final String employeeDBFile = "employeeDB/employees.txt";
-    private EmployeeValidator employeeValidator = new EmployeeValidator();
 
     @Override
     public boolean addEmployee(Employee employee) {
-        if( employeeValidator.isValid(employee) ) {
-            BufferedWriter bw = null;
-            try {
-                bw = new BufferedWriter(new FileWriter(employeeDBFile, true));
-                bw.write(employee.toString());
-                bw.newLine();
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            finally {
-                if (bw != null)
-                    try {
-                        bw.close();
-                    } catch (IOException e) {
-                        System.err.println("Error while closing the bufferWriter: " + e);
-                    }
-            }
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(employeeDBFile, true));
+            bw.write(employee.toString());
+            bw.newLine();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bw != null)
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    System.err.println("Error while closing the bufferWriter: " + e);
+                }
         }
+
         return false;
     }
 
@@ -55,7 +48,7 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
             while ((line = br.readLine()) != null) {
                 Employee empl = new Employee();
                 try {
-                    empl = (Employee) Employee.getEmployeeFromString(line, counter);
+                    empl = Employee.getEmployeeFromString(line, counter);
                     employeeList.add(empl);
                 } catch (EmployeeException ex) {
                     System.err.println("Error while reading: " + ex.toString());
@@ -108,7 +101,7 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
                 Employee employee = new Employee();
                 try {
                     employee = Employee.getEmployeeFromString(line, counter);
-                } catch(EmployeeException ex) {
+                } catch (EmployeeException ex) {
                     System.err.println("Error while reading: " + ex.toString());
                 }
                 if (employee.equals(oldEmployee)) {
@@ -156,7 +149,7 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
                 try {
                     Employee employee = Employee.getEmployeeFromString(line, counter);
                     employeeList.add(employee);
-                } catch(EmployeeException ex) {
+                } catch (EmployeeException ex) {
                     System.err.println("Error while reading: " + ex.toString());
                 }
                 counter++;
@@ -196,9 +189,10 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
 
     @Override
     public List<Employee> getEmployeesBySalaryDesc() {
-        List<Employee> employeesSortedBySalary= getEmployeeList().stream().sorted((e1,e2)->
-        {Double salary1=e1.getSalary();
-            Double salary2=e2.getSalary();
+        List<Employee> employeesSortedBySalary = getEmployeeList().stream().sorted((e1, e2) ->
+        {
+            Double salary1 = e1.getSalary();
+            Double salary2 = e2.getSalary();
             return salary1.compareTo(salary2);
         }).collect(Collectors.toList());
         Collections.reverse(employeesSortedBySalary);
