@@ -17,31 +17,20 @@ import main.java.salariati.validator.EmployeeValidator;
 import main.java.salariati.repository.mock.EmployeeMock;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 public class AddEmployeeTest {
 
-	private EmployeeRepositoryInterface employeeRepository;
 	private EmployeeController controller;
-	private EmployeeValidator employeeValidator;
 	
 	@Before
 	public void setUp() {
-		employeeRepository = new EmployeeMock();
-		controller         = new EmployeeController(employeeRepository);
-		employeeValidator  = new EmployeeValidator();
+		EmployeeRepositoryInterface employeeRepository = new EmployeeMock();
+		controller = new EmployeeController(employeeRepository);
 	}
 	
 	@Test
-	public void testRepositoryMock() {
-		assertFalse(controller.getEmployeesList().isEmpty());
-		assertEquals(6, controller.getEmployeesList().size());
-	}
-	
-	@Test
-	public void testAddNewEmployee() {
+	public void TC1_ECP_valid() {
 		Employee newEmployee = new Employee("ValidLastName","ValidFirstName", "1910509055057", DidacticFunction.ASISTENT, 3000);
-		assertTrue(employeeValidator.isValid(newEmployee));
 		controller.addEmployee(newEmployee);
 		assertEquals(7, controller.getEmployeesList().size());
 		assertTrue(newEmployee.equals(controller.getEmployeesList().get(controller.getEmployeesList().size() - 1)));
