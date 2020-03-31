@@ -1,10 +1,10 @@
 package salariati.test;
 
-import main.java.salariati.controller.EmployeeController;
+import salariati.controller.EmployeeController;
 import main.java.salariati.enumeration.DidacticFunction;
 import main.java.salariati.model.Employee;
-import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
-import main.java.salariati.repository.mock.EmployeeMock;
+import salariati.repository.interfaces.EmployeeRepositoryInterface;
+import salariati.repository.mock.EmployeeMock;
 import org.junit.Before;
 import org.junit.Test;
 
