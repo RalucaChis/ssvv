@@ -1,11 +1,11 @@
 package salariati.main;
 
-import main.java.salariati.controller.EmployeeController;
+import salariati.controller.EmployeeController;
 import main.java.salariati.enumeration.DidacticFunction;
 import main.java.salariati.model.Employee;
 import salariati.repository.implementations.EmployeeRepository;
-import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
-import main.java.salariati.repository.mock.EmployeeMock;
+import salariati.repository.interfaces.EmployeeRepositoryInterface;
+import salariati.repository.mock.EmployeeMock;
 import main.java.salariati.validator.EmployeeValidator;
 import salariati.view.UIEmployee;
 

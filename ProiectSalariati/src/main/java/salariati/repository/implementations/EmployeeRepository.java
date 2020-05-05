@@ -2,7 +2,7 @@ package salariati.repository.implementations;
 
 import main.java.salariati.exception.EmployeeException;
 import main.java.salariati.model.Employee;
-import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
+import salariati.repository.interfaces.EmployeeRepositoryInterface;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -37,21 +37,23 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
     }
 
     @Override
-    public void deleteEmployee(Employee employee) {
+    public boolean deleteEmployee(String CNP) {
         //saving the employees in a list
         List<Employee> employeeList = getEmployeeList();
         List<Employee> deleteList= new ArrayList<>();
+        boolean deleted = false;
 
         //deleting the employee given as a parameter from list
         for (Employee e : employeeList) {
-            if (e.equals(employee)) {
+            if (e.getCnp().equals(CNP)) {
                 deleteList.add(e);
+                deleted = true;
             }
         }
         employeeList.removeAll(deleteList);
 
         //writing the new list in file
-        BufferedWriter bw = null;
+        BufferedWriter bw;
         try {
             bw = new BufferedWriter(new FileWriter(employeeDBFile));
             for (Employee e : employeeList) {
@@ -63,6 +65,7 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return deleted;
     }
 
     @Override

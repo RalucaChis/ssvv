@@ -1,6 +1,6 @@
 package salariati.view;
 
-import main.java.salariati.controller.EmployeeController;
+import salariati.controller.EmployeeController;
 import main.java.salariati.enumeration.DidacticFunction;
 import main.java.salariati.model.Employee;
 

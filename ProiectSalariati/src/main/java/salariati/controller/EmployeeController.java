@@ -1,7 +1,7 @@
-package main.java.salariati.controller;
+package salariati.controller;
 
 import main.java.salariati.model.Employee;
-import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
+import salariati.repository.interfaces.EmployeeRepositoryInterface;
 import main.java.salariati.validator.EmployeeValidator;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class EmployeeController {
 
     public void deleteEmployee(Employee employee) {
         if (employeeValidator.isValid(employee))
-            employeeRepository.deleteEmployee(employee);
+            employeeRepository.deleteEmployee(employee.getCnp());
     }
 
     public List<Employee> getEmployeesByAgeAsc() {

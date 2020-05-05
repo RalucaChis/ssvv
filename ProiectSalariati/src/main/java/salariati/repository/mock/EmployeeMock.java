@@ -1,4 +1,4 @@
-package main.java.salariati.repository.mock;
+package salariati.repository.mock;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.ListIterator;
 
 import main.java.salariati.enumeration.DidacticFunction;
 import main.java.salariati.model.Employee;
-import main.java.salariati.repository.interfaces.EmployeeRepositoryInterface;
+import salariati.repository.interfaces.EmployeeRepositoryInterface;
 import main.java.salariati.validator.EmployeeValidator;
 
 public class EmployeeMock implements EmployeeRepositoryInterface {
@@ -18,7 +18,7 @@ public class EmployeeMock implements EmployeeRepositoryInterface {
     private EmployeeValidator employeeValidator;
 
     public EmployeeMock() {
-        employeeList = new ArrayList<Employee>();
+        employeeList = new ArrayList<>();
         employeeValidator = new EmployeeValidator();
 
         Employee Ionel = new Employee("Pacuraru", "Marcel", "1230516890876", DidacticFunction.ASISTENT, 2500);
@@ -46,8 +46,15 @@ public class EmployeeMock implements EmployeeRepositoryInterface {
     }
 
     @Override
-    public void deleteEmployee(Employee employee) {
-        // TODO Auto-generated method stub
+    public boolean deleteEmployee(String CNP) {
+        for(Employee employee : employeeList){
+            if (employee.getCnp().equals(CNP)){
+                employeeList.remove(employee);
+                return true;
+            }
+        }
+         return false;
+
     }
 
     @Override
